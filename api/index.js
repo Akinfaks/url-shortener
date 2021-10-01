@@ -1,8 +1,8 @@
-var http = require('http');
-var express = require('express');
-const cors = require('cors')
-var bodyParser = require('body-parser');
-const logger = require('morgan');
+import http from 'http'
+import express from 'express'
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import logger from 'morgan'
 
 const app = express()
 app.server = http.createServer(app);
