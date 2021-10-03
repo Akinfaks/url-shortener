@@ -3,6 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import logger from 'morgan'
+import endpoints from './router';
 
 const app = express()
 app.server = http.createServer(app);
@@ -14,8 +15,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
-
+app.use("/api", endpoints);
 
 
 const port = 8000
@@ -44,7 +44,3 @@ app.use(async (req, res, next) => {
     var port = server.address().port
     console.log("App listening at http://%s:%s", host, port) // 10.0.2.2
   })
-
-// app.listen(port, () => {
-//   console.log(`istening at http://localhost:${port}`)
-// })
