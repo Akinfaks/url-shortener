@@ -17,12 +17,14 @@ export const encode = async (req, res) => {
             
             if (short){
                 console.log('entry found in memory');
+                const { short_url_string } = shortener.encodedUrl(longUrl);
                 res.json({
-                    url: longUrl,
+                    url: short_url_string,
                     hash: short,
                     status: 200,
                     statusTxt: 'OK'
                 });
+                return;
             } else {
 
                 console.log('entry NOT found in memory, saving new');
@@ -44,6 +46,8 @@ export const encode = async (req, res) => {
             }
 
             
+        } else {
+            throw new Error("Invalid request");
         }
     } catch (error) {
         console.log(error)
@@ -57,7 +61,7 @@ export const decode = async (req, res) => {
     try{
         // const path = req.pathname.substring(1); 
 
-        var short = req.query.url_short; // path === hash
+        var short = req.query.shortUrl; // path === hash
         const path = new URL(short).pathname.substring(1);
 
         if (path){
@@ -91,7 +95,7 @@ export const statistic = async (req, res) => {
     
     try {
 
-        var hash = req.query.hash;
+        var hash = req.query.url_path;
 
         const exist = shortener.findShort(hash)
 
