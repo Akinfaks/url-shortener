@@ -4,7 +4,9 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import logger from 'morgan'
 import endpoints from './router';
-
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 const app = express()
 app.server = http.createServer(app);
 
@@ -18,7 +20,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/", endpoints);
 
 
-const port = 8000
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -31,6 +32,8 @@ app.use(async (req, res, next) => {
     next(error)
   })
 
+const port  =  process.env.PORT;
+
   app.use((err, req, res, next)=>{
     res.status(err.status || 500)
     res.json({
@@ -39,7 +42,7 @@ app.use(async (req, res, next) => {
     })
   })
 
-  var server = app.listen(port, function () { 
+  var server = app.listen(port||8000, function () { 
     var host = server.address().address
     var port = server.address().port
     console.log("App listening at http://%s:%s", host, port) // 10.0.2.2
