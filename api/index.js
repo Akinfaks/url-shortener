@@ -15,7 +15,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("/api", endpoints);
+app.use("/", endpoints);
 
 
 const port = 8000
