@@ -7,6 +7,7 @@ import endpoints from './router';
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
+
 const app = express()
 app.server = http.createServer(app);
 
@@ -42,7 +43,7 @@ const port  =  process.env.PORT;
     })
   })
 
-  var server = app.listen(port||8000, function () { 
+  var server = app.listen(port, function () { 
     var host = server.address().address
     var port = server.address().port
     console.log("App listening at http://%s:%s", host, port) // 10.0.2.2
