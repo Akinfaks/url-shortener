@@ -1,6 +1,8 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 class Shortener{
-
     constructor() {
         this.SERVER = process.env.SERVER;
         this.PORT = process.env.PORT;
@@ -114,7 +116,7 @@ class Shortener{
                     aList.push({
                         short, 
                         long: this.short_to_url[short],
-                        hit:this.hit[short]
+                        hit:this.statistic[short]
                     })
                 });
                 
