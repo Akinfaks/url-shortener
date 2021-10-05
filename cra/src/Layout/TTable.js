@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import table from '../hooks/TableHook';
+import { InputMain } from '../components/styled';
 
 
 // function createData(name, calories, fat, carbs, protein) {
@@ -19,19 +20,30 @@ import table from '../hooks/TableHook';
 //     createData('Eclair', 262, 16.0, 24, 6.0),
 //   ];
   
-  export default function TTable({Spinner, data, loading}) {
+  export default function TTable({Spinner, data, loading, onChange, onInAppSearchChange, form}) {
     
     return (
 
       <div style={{width: '80%', margin: 'auto'}}>
+
            {/* {!data?.length > 0 && loading && <Spinner />} */}
            <h4>Shortener List</h4>
+
+           <InputMain 
+            placeholder = "...Search"
+            onChange = { onInAppSearchChange }
+            // style={{ flexGrow: 1}}
+            name = "search"
+            value = { form?.search }
+            
+        />
 
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="caption table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Long&nbsp;URL</TableCell>
+                    <TableCell>Hash&nbsp;</TableCell>
+                    <TableCell align="right">Long&nbsp;URL</TableCell>
                     <TableCell align="right">Short&nbsp;URL</TableCell>
                     <TableCell align="right">Hit</TableCell>
                   </TableRow>
@@ -40,8 +52,9 @@ import table from '../hooks/TableHook';
                   {data?.map((row) => (
                     <TableRow key={row.name}>
                       <TableCell component="th" scope="row">
-                        {row.long}
+                        {row.hash}
                       </TableCell>
+                      <TableCell align="right">{row.long}</TableCell>
                       <TableCell align="right">{row.short}</TableCell>
                       <TableCell align="right">{row.hit}</TableCell>
                     </TableRow>
