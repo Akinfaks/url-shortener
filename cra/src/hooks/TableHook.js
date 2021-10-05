@@ -20,7 +20,7 @@ function TableHook() {
 
     const [filterFn, setFilterFn] = useState({fn: items=>{ return items; }});
 
-    const onInAppSearchChange = async (e, f)=>{
+    const onChangeSearch = async (e, f)=>{
         console.log("e.target", e.target.value)
         const {target:{name, value}} = e;
         // console.log(target.name, target.value)
@@ -68,7 +68,7 @@ function TableHook() {
     //     createData('Eclair', 262, 16.0, 24, 6.0),
     //   ];
           
-    return { Spinner, getList, onInAppSearchChange, filterFn, form, ...state }
+    return { Spinner, getList, onChangeSearch, filterFn, form, ...state }
 
 }
 

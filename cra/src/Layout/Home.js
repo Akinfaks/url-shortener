@@ -20,22 +20,22 @@ const DocCard = styled.div`
     }
     width: 100%;
     position: relative;
-
 `;
+
 //function, Scalability && load testing
 export default function Home(props) {
     
-    const { Spinner, data, loading, getList } = TableHook();
+    const { Spinner, data, loading, getList, filterFn, onChangeSearch, form } = TableHook();
 
     const {linksRef, tableRef, showLinks, toggleButton, HeaderTop } = HomeHook(getList);
 
     return (
+        
         <div>
             
                 <HeaderTop toggleButton = {toggleButton} showLinks = { showLinks } />
 
-
-                    <div className=""  style={{display: 'flex',  justifyContent: 'space-between', position: 'relative', top: 50}} ref={linksRef}  >
+                    <div className=""  style={{display: 'flex',  justifyContent: 'space-between', position: 'relative', top: 50}} ref={linksRef}>
 
                         <DocCard  className='item' >
 
@@ -44,7 +44,6 @@ export default function Home(props) {
                         </DocCard>
                 
                     </div>
-
                 
                     <div style={{zIndex:1}} >
 
@@ -52,8 +51,10 @@ export default function Home(props) {
 
                             <Table
                                 Spinner = { Spinner}
-                                data = { data }
+                                data = {filterFn?.fn(data) }
                                 loading = { loading }
+                                onChangeSearch = { onChangeSearch }
+                                form = { form }
                             />
 
                         </div>

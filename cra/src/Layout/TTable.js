@@ -20,7 +20,7 @@ import { InputMain } from '../components/styled';
 //     createData('Eclair', 262, 16.0, 24, 6.0),
 //   ];
   
-  export default function TTable({Spinner, data, loading, onChange, onInAppSearchChange, form}) {
+  export default function TTable({Spinner, data, loading, onChange, onChangeSearch, form}) {
     
     return (
 
@@ -31,7 +31,7 @@ import { InputMain } from '../components/styled';
 
            <InputMain 
             placeholder = "...Search"
-            onChange = { onInAppSearchChange }
+            onChange = { onChangeSearch }
             // style={{ flexGrow: 1}}
             name = "search"
             value = { form?.search }

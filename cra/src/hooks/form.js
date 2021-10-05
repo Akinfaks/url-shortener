@@ -3,13 +3,11 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { ButtonContainer, InputMain } from '../components/styled'
 import { isValidHttpUrl } from '../utils';
 
-
-function Form() {
+function Form(){
     const [form, setForm] = useState();
     const [errorMsg, setErrorMsg] = useState(null);
     const [result, setResult] = useState({data: null, loading: false})
 	const baseURL = process.env.REACT_APP_BACKEND_URL;
-
 
     const onChange = ({target})=>{
         const {name, value } = target;
