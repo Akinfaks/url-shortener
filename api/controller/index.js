@@ -17,10 +17,11 @@ export const encode = async (req, res) => {
             
             if (short){
                 console.log('entry found in memory');
-                const { short_url_string } = shortener.encodedUrl(longUrl);
+                const { hash, short_url_string } = shortener.encodedUrl(longUrl);
                 res.json({
-                    url: short_url_string,
-                    hash: short,
+                    short: short_url_string,
+                    long:longUrl,
+                    hash: hash,
                     status: 200,
                     statusTxt: 'OK'
                 });
@@ -34,7 +35,8 @@ export const encode = async (req, res) => {
                 console.log(short_url_string, hash);
 
                 res.json({
-                    url: short_url_string,
+                    short: short_url_string,
+                    long:longUrl,
                     hash: hash,
                     status: 200,
                     statusTxt: 'OK'
