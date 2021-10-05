@@ -47,7 +47,7 @@ function TableHook() {
     //     createData('Eclair', 262, 16.0, 24, 6.0),
     //   ];
           
-    return { Spinner, ...state }
+    return { Spinner, getList, ...state }
 
 }
 

@@ -2,7 +2,7 @@ import React, { useState, createRef, useEffect } from 'react'
 import styled from 'styled-components';
 import { ButtonContainer, Welcome, TopContainer } from '../components/styled';
 
-function HomeHook() {
+function HomeHook(getList) {
 
   const [showLinks, setShowLinks] = useState(true);
   const linksRef = createRef(null);
@@ -14,8 +14,13 @@ function HomeHook() {
   const toggleButton = () => {
     setShowLinks(!showLinks);
   };
-  
 
+  useEffect(()=>{
+    if (!showLinks){
+      getList()
+    }
+  }, [showLinks])
+  
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
     const tableHeight = tableRef.current.getBoundingClientRect().height;
@@ -72,9 +77,8 @@ function HomeHook() {
           {/* </SpanText> */}
       </ButtonContainer>
 
-  </TopContainer>
+    </TopContainer>)
 
-  )
   return {linksRef, tableRef, showLinks, toggleButton, HeaderTop }
 
 }

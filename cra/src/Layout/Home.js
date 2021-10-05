@@ -5,7 +5,6 @@ import TableHook from '../hooks/TableHook';
 import ShortenerForm from './ShortenerForm';
 import Table from './TTable';
 
-
 const DocCard = styled.div`
     /* background: orange; */
     overflow: hidden;
@@ -23,15 +22,12 @@ const DocCard = styled.div`
     position: relative;
 
 `;
-
+//function, Scalability && load testing
 export default function Home(props) {
-
     
+    const { Spinner, data, loading, getList } = TableHook();
 
-    const {linksRef, tableRef, showLinks, toggleButton, HeaderTop } = HomeHook();
-
-    
-    const { Spinner, data, loading } = TableHook();
+    const {linksRef, tableRef, showLinks, toggleButton, HeaderTop } = HomeHook(getList);
 
     return (
         <div>
@@ -47,25 +43,25 @@ export default function Home(props) {
                         
                         </DocCard>
                 
-                </div>
+                    </div>
 
                 
-                <div style={{zIndex:1}} >
+                    <div style={{zIndex:1}} >
 
-                    <div className="mb-4" ref = {tableRef}>
+                        <div className="mb-4" ref = {tableRef}>
 
-                        <Table
-                            Spinner = { Spinner}
-                            data = { data }
-                            loading = { loading }
-                        />
+                            <Table
+                                Spinner = { Spinner}
+                                data = { data }
+                                loading = { loading }
+                            />
+
+                        </div>
+
 
                     </div>
 
 
-                </div>
-
-
-        </div>
+            </div>
     )
 }
