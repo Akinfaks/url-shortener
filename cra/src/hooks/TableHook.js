@@ -11,10 +11,31 @@ function TableHook() {
         data: [],
         loading: false,
     });
+
+    const [form, setForm] = useState();
     
     // function createData(long, short, hit) {
     //     return { long, short, hit };
     // }
+
+    const [filterFn, setFilterFn] = useState({fn: items=>{ return items; }});
+
+    const onInAppSearchChange = async (e, f)=>{
+        console.log("e.target", e.target.value)
+        const {target:{name, value}} = e;
+        // console.log(target.name, target.value)
+        // const {name, value} = target;
+        setForm({...form, [name]: value})
+        setFilterFn({
+            fn: items => {
+                if (value == "")
+                    return items;
+                else 
+                    return items.filter(x=>x.hash.toLowerCase().includes(value.toLowerCase()))
+            }
+        })
+    }
+
 
     const Spinner =  (
         <Box sx={{ display: 'flex' }}>
@@ -47,7 +68,7 @@ function TableHook() {
     //     createData('Eclair', 262, 16.0, 24, 6.0),
     //   ];
           
-    return { Spinner, getList, ...state }
+    return { Spinner, getList, onInAppSearchChange, filterFn, form, ...state }
 
 }
 
