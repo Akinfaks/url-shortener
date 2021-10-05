@@ -6,7 +6,7 @@ class Shortener{
     constructor() {
         this.SERVER = process.env.SERVER;
         this.PORT = process.env.PORT;
-        this.id = 10000000; /* You can start from a non-zero seed */
+        this.id = 100000000; /* You can start from a non-zero seed */
         this.url_to_index = new Array();
         this.short_to_url = new Array();
         this.statistic = new Array();
@@ -38,7 +38,7 @@ class Shortener{
         let short_url = this.url_to_index[url];
         if (short_url == undefined) { /* Nope, not added */
             short_url = this.num_to_base62(this.id);
-            while (short_url.length < 5) { /* Add padding */
+            while (short_url.length < 6) { /* Add padding */
                 short_url = this.CHARS[0] + short_url;
             }
             this.url_to_index[url] = short_url;
@@ -71,6 +71,14 @@ class Shortener{
         const short_url_string = 'http://' + this.SERVER + ':' + this.PORT +
                                '/' + hash;
         return {hash, short_url_string}
+
+    }
+
+    toShortUrl(hash){
+        const short_url_string = 'http://' + this.SERVER + ':' + this.PORT +
+                               '/' + hash;
+
+        return {hash, short_url_string};
 
     }
     
@@ -114,7 +122,7 @@ class Shortener{
                 const shortList = Object.keys(this.short_to_url);
                 shortList.forEach((short)=>{
                     aList.push({
-                        short, 
+                        short: this.toShortUrl(short)["short_url_string"], 
                         long: this.short_to_url[short],
                         hit:this.statistic[short]
                     })
