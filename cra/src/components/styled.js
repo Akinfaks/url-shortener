@@ -22,7 +22,7 @@ export const InputMain = styled.input`
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   overflow: hidden;
-  -webkit-background-clip: text !important;  
+  /* -webkit-background-clip: text !important;   */
   min-height: 30px;
 `;
 
