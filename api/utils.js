@@ -122,6 +122,7 @@ class Shortener{
                 const shortList = Object.keys(this.short_to_url);
                 shortList.forEach((short)=>{
                     aList.push({
+                        hash: short,
                         short: this.toShortUrl(short)["short_url_string"], 
                         long: this.short_to_url[short],
                         hit:this.statistic[short]
