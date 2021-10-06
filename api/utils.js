@@ -59,7 +59,6 @@ class Shortener{
 
     findShort(hash){
 
-        console.log(this.short_to_url);
         return this.short_to_url[hash];
 
     }
@@ -129,8 +128,6 @@ class Shortener{
                     })
                 });
                 
-                console.log('shortList', aList)
-
                 resolve(aList);
     
             } catch (error) {
