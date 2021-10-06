@@ -1,22 +1,28 @@
 import Shortener from "../utils";
 
 const shortener = new Shortener();
+
 export const found = async (req, res) => {
-    res.json("Tested and working")
+    try{
+        res.status(200).json({status:200, message: "success"});
+        return;
+    } catch(error) {
+
+    }
 }
 
 export const encode = async (req, res) => {
     try {
+
         const { longUrl } = req.query;
 
-        console.log("longUrl", longUrl);
 
         if (longUrl){
 
             const short = shortener.findUrl(longUrl); 
             
             if (short){
-                console.log('entry found in memory');
+
                 const { hash, short_url_string } = shortener.encodedUrl(longUrl);
                 res.json({
                     short: short_url_string,
@@ -28,13 +34,9 @@ export const encode = async (req, res) => {
                 return;
             } else {
 
-                console.log('entry NOT found in memory, saving new');
-
                 const { hash, short_url_string } = shortener.encodedUrl(longUrl);
 
-                console.log(short_url_string, hash);
-
-                res.json({
+                res.status(200).json({
                     short: short_url_string,
                     long:longUrl,
                     hash: hash,
@@ -52,8 +54,9 @@ export const encode = async (req, res) => {
             throw new Error("Invalid request");
         }
     } catch (error) {
-        console.log(error)
+
         res.status(500).json({status: 500, message: error.message})
+
     }
 
 }
@@ -86,7 +89,6 @@ export const decode = async (req, res) => {
 
     } catch(error) {
 
-        console.log(error)
         res.status(500).json({status: 500, message: error.message})
 
     }
@@ -119,8 +121,9 @@ export const statistic = async (req, res) => {
         });
         
     } catch (error) {
-        // console.log(error)
+
         res.status(500).json({status: 500, message: error.message})
+
     }
 }
 
@@ -130,18 +133,19 @@ export const list = async (req, res) => {
         var path = req.query.hash;
 
         const list = await shortener.list();
-        console.log("Show List")
+
         res.json(list);            
 
     } catch (error) {
         
+        res.status(500).json({status: 500, message: error.message})
+
     }
 }
 
 export const redirect = async (req, res) => {
     try {
         var path = req.params.hash;
-        console.log('path', path);
 
         if (path){
 
@@ -156,14 +160,12 @@ export const redirect = async (req, res) => {
                 res.redirect(long_url_string);
 
             } else {
-
                 res.redirect('/');
-
             }
         }
             
     } catch (error) {
-        console.log(error)
+
         res.json.status(500)({status: 500, message: error.message})
 
     }
