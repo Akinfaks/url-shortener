@@ -18,6 +18,8 @@ dist/
 target/
 dist/
 
+coverage/
+
 # JetBrains IDE
 .idea/
 .vscode
