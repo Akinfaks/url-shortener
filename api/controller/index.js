@@ -19,7 +19,7 @@ export const encode = async (req, res) => {
 
         if (longUrl){
 
-            const short = shortener.findUrl(longUrl); 
+            const short = shortener.findUrl(longUrl.trim()); 
             
             if (short){
 
