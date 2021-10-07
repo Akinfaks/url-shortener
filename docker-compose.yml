@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: ./api/Dockerfile
+    ports:
+      - "8000:8000"
+    # networks:
+    #   - backend
+
+  frontend:
+    env_file: "./cra/.env"
+    build:
+      context: ./
+      dockerfile: ./cra/Dockerfile
+    ports:
+      - "3000:3000"
+    # networks:
+    #   - frontend
+    # links:
+    #   - "api"
+
+  # networks:
+  #   frontend:
+  #     driver: bridge
+  #   backend:
+  #     driver: bridge
