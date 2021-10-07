@@ -95,7 +95,8 @@ class Shortener{
 
     hit(hash){
 
-        this.statistic[hash] =+ 1;
+        this.statistic[hash] = this.statistic[hash] + 1;
+
         return {hash, hit:this.statistic[hash]}
 
     }
